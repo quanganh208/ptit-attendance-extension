@@ -14,17 +14,20 @@ Extension hỗ trợ điểm danh nhanh chóng cho sinh viên PTIT trên hệ th
 
 ### Giao diện Extension Popup
 
-![Extension Popup](screenshots/popup-interface.png)
+<img src="screenshots/popup-interface.png" alt="Extension Popup" width="400">
+
 _Giao diện popup của extension khi click vào icon trên thanh công cụ_
 
 ### Chi tiết lớp học với nút Điểm Danh
 
-![Class Detail Modal](screenshots/class-detail-modal.png)
+<img src="screenshots/class-detail-modal.png" alt="Class Detail Modal" width="600">
+
 _Modal chi tiết lớp học với nút "Điểm Danh Ngay" được thêm bởi extension_
 
 ### Chi tiết lớp học khi chưa mở điểm danh
 
-![Attendance Modal](screenshots/attendance-modal.png)
+<img src="screenshots/attendance-modal.png" alt="Attendance Modal" width="600">
+
 _Modal chi tiết lớp học khi giảng viên chưa mở điểm danh_
 
 ## 🔧 Yêu cầu
