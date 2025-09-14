@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PTIT Attendance Helper</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 350px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background: #f0f2f5;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #ff4d4f 0%, #ff7875 100%);
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+
+      .header p {
+        font-size: 12px;
+        opacity: 0.9;
+      }
+
+      .content {
+        padding: 20px;
+      }
+
+      .status-card {
+        background: white;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .status-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .status-row:last-child {
+        margin-bottom: 0;
+      }
+
+      .status-label {
+        font-size: 14px;
+        color: #595959;
+      }
+
+      .status-value {
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .status-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+      }
+
+      .status-active {
+        background: #f6ffed;
+        color: #52c41a;
+        border: 1px solid #b7eb8f;
+      }
+
+      .status-inactive {
+        background: #fff2e8;
+        color: #fa8c16;
+        border: 1px solid #ffd591;
+      }
+
+      .info-section {
+        background: white;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .info-title {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #262626;
+      }
+
+      .info-list {
+        list-style: none;
+      }
+
+      .info-list li {
+        font-size: 13px;
+        color: #595959;
+        margin-bottom: 8px;
+        padding-left: 15px;
+        position: relative;
+      }
+
+      .info-list li:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #52c41a;
+      }
+
+      .button-container {
+        margin-top: 15px;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .btn-primary {
+        background: #ff4d4f;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: #ff7875;
+      }
+
+      .btn-secondary {
+        background: white;
+        color: #595959;
+        border: 1px solid #d9d9d9;
+        margin-top: 10px;
+      }
+
+      .btn-secondary:hover {
+        color: #ff4d4f;
+        border-color: #ff4d4f;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 15px;
+        font-size: 12px;
+        color: #8c8c8c;
+      }
+
+      .footer a {
+        color: #ff4d4f;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>PTIT Attendance Helper</h1>
+      <p>Hỗ trợ điểm danh lớp học nhanh chóng</p>
+    </div>
+
+    <div class="content">
+      <div class="status-card">
+        <div class="status-row">
+          <span class="status-label">Trạng thái:</span>
+          <span class="status-badge status-active" id="extensionStatus"
+            >Đang hoạt động</span
+          >
+        </div>
+        <div class="status-row">
+          <span class="status-label">Phiên bản:</span>
+          <span class="status-value">1.0.0</span>
+        </div>
+        <div class="status-row">
+          <span class="status-label">Tab hiện tại:</span>
+          <span class="status-value" id="currentTab">Đang kiểm tra...</span>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h3 class="info-title">Hướng dẫn sử dụng</h3>
+        <ul class="info-list">
+          <li>Truy cập trang PTIT SLINK</li>
+          <li>Đăng nhập với tài khoản của bạn</li>
+          <li>Vào mục Lịch và chọn lớp học cần điểm danh</li>
+          <li>Nhấn nút "Điểm Danh Ngay" nếu giảng viên đã mở điểm danh</li>
+        </ul>
+      </div>
+
+      <div class="button-container">
+        <button class="btn btn-primary" id="openSlink">Mở PTIT SLINK</button>
+        <button class="btn btn-secondary" id="refreshPage">
+          Làm mới trang hiện tại
+        </button>
+      </div>
+    </div>
+
+    <div class="footer">
+      Phát triển bởi
+      <a href="https://github.com/quanganh208" id="author">Quang Anh</a> with ❤️
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

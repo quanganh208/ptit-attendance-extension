@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "PTIT Attendance Helper",
+  "version": "2.0.0",
+  "description": "Hỗ trợ điểm danh lớp học trên PTIT SLINK",
+  "author": "QuangAnh",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": [
+    "https://slink.ptit.edu.vn/*",
+    "https://gwdu.ptit.edu.vn/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://slink.ptit.edu.vn/*"],
+      "js": ["lib/crypto-js.min.js", "content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icons/icon.png"
+  },
+  "icons": {
+    "16": "icons/icon.png",
+    "48": "icons/icon.png",
+    "128": "icons/icon.png"
+  }
+}
